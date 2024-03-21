@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, {useRef, useState} from "react";
 import Webcam from "react-webcam";
+import './videoRecorder.css';
 
 const VideoRecorder = () => {
     const webcamRef = useRef(null);
@@ -13,8 +14,8 @@ const VideoRecorder = () => {
         try {
             const audioStream = await navigator.mediaDevices.getUserMedia({
                 audio: {
-                    echoCancellation: true, // Enable echo cancellation
-                    noiseSuppression: true // Enable noise suppression
+                    echoCancellation: true,
+                    noiseSuppression: true
                 }
             });
             const videoTrack = webcamRef.current.video.srcObject.getVideoTracks()[0];
@@ -28,7 +29,7 @@ const VideoRecorder = () => {
             };
 
             mediaRecorderRef.current.onstop = () => {
-                const blob = new Blob(chunks, { type: "video/webm" });
+                const blob = new Blob(chunks, {type: "video/webm"});
                 const url = URL.createObjectURL(blob);
                 setVideoUrl(url);
             };
@@ -69,39 +70,37 @@ const VideoRecorder = () => {
 
     const retakeRecording = () => {
         setVideoUrl(null);
+        setRecording(false);
+        setPaused(false);
     };
 
     return (
-        <div>
+        <div className="video-recorder container-fluid position-relative" id='screen'>
             {videoUrl ? (
-                <video controls src={videoUrl} />
+                <video controls src={videoUrl} id="playback" className=""/>
             ) : (
-                <Webcam
-                    audio={false} // Enable audio capture
-                    ref={webcamRef}
-                    screenshotFormat="image/jpeg"
+                <Webcam id='webcam'
+                        audio={false}
+                        ref={webcamRef}
+                        screenshotFormat="image/jpeg"
                 />
             )}
-            <div>
-                <button onClick={startRecording} disabled={recording}>Start Recording</button>
-                <button onClick={pauseRecording} disabled={!recording || paused}>Pause Recording</button>
-                <button onClick={resumeRecording} disabled={!paused}>Resume Recording</button>
-                <button onClick={stopRecording} disabled={!recording}>Stop Recording</button>
-                <button onClick={retakeRecording}>Retake</button>
+
+            <div id="button-bar" className="w-100 d-flex align-items-center justify-content-center">
+                <div className={"w-75 h-auto d-flex align-items-center justify-content-evenly"}>
+                    <button onClick={startRecording} disabled={recording} id='start-btn'></button>
+                    <button onClick={pauseRecording} disabled={!recording || paused} id='pause-btn'></button>
+                    <button onClick={resumeRecording} disabled={!paused} id='resume-btn'></button>
+                    <button onClick={stopRecording} disabled={!recording} id='stop-btn'></button>
+                </div>
             </div>
+
+            <button onClick={retakeRecording} id='retake-btn' className={"position-fixed"}></button>
+            {recording && (
+                <div id='indicator' className={paused ? "paused-dot" : "recording-dot"}/>
+            )}
         </div>
     );
 };
 
 export default VideoRecorder;
-
-
-
-
-
-
-
-
-
-
-
