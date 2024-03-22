@@ -9,6 +9,7 @@ const VideoRecorder = () => {
     const [paused, setPaused] = useState(false);
     const [videoUrl, setVideoUrl] = useState(null);
     const [audioStream, setAudioStream] = useState(null);
+    const [share, setShare] = useState(false);
 
     const startRecording = async () => {
         try {
@@ -74,6 +75,10 @@ const VideoRecorder = () => {
         setPaused(false);
     };
 
+    const showShareOptions = () => {
+        setShare(prevShare => !prevShare);
+    }
+
     return (
         <div className="video-recorder container-fluid position-relative" id='screen'>
             {videoUrl ? (
@@ -92,6 +97,8 @@ const VideoRecorder = () => {
                     <button onClick={pauseRecording} disabled={!recording || paused} id='pause-btn'></button>
                     <button onClick={resumeRecording} disabled={!paused} id='resume-btn'></button>
                     <button onClick={stopRecording} disabled={!recording} id='stop-btn'></button>
+                    <button disabled={!videoUrl} onClick={showShareOptions} id='share-btn'></button>
+
                 </div>
             </div>
 
@@ -99,6 +106,23 @@ const VideoRecorder = () => {
             {recording && (
                 <div id='indicator' className={paused ? "paused-dot" : "recording-dot"}/>
             )}
+
+            {share && (
+                <div className={"position-fixed"} id='share-options'>
+                    <div className={"d-flex align-items-center gap-3 border-bottom me-3 ms-3"}>
+                        <div></div>
+                        <h4>WhatsApp</h4>
+                    </div>
+                    <div className={"d-flex align-items-center gap-3 border-bottom me-3 ms-3"}>
+                        <div></div>
+                        <h4>Email</h4>
+                    </div>
+                    <div className={"d-flex align-items-center gap-3 me-3 ms-3"}>
+                        <div></div>
+                        <h4>Add to my profile</h4>
+                    </div>
+                </div>)}
+
         </div>
     );
 };

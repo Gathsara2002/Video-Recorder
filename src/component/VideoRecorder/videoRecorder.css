@@ -58,6 +58,10 @@
     background-image: url("./../../assets/icon-save.png");
 }
 
+#share-btn {
+    background-image: url("./../../assets/share-msg.png");
+}
+
 #retake-btn {
     padding: 0;
     width: 50px !important;
@@ -108,6 +112,48 @@
     border: none;
 }
 
+#share-options {
+    background-color: #222222;
+    width: 330px;
+    height: 250px;
+    bottom: 4.2rem;
+    right: 5rem;
+    border: 1px solid white;
+    z-index: 10;
+}
+
+#share-options > div {
+    height: 33.34%;
+    cursor: pointer;
+}
+
+#share-options > div > h4 {
+    font-size: 24px;
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    color: white;
+}
+
+#share-options > div > div {
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#share-options > div:nth-child(1) > div:nth-child(1) {
+    background-image: url("../../assets/icon-whatsapp.png");
+}
+
+#share-options > div:nth-child(2) > div:nth-child(1) {
+    background-image: url("../../assets/icon-email.png");
+}
+
+#share-options > div:nth-child(3) > div:nth-child(1) {
+    background-image: url("../../assets/profile.png");
+}
+
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
 
@@ -120,6 +166,12 @@
         width: 45px !important;
         height: 45px !important;
     }
+
+    #share-options {
+        bottom: 3.4rem;
+        right: 3rem;
+    }
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
@@ -137,6 +189,21 @@
     #indicator {
         width: 20px;
         height: 20px;
+    }
+
+    #share-options {
+        width: 270px;
+        height: 200px;
+        right: 3rem;
+    }
+
+    #share-options > div > h4 {
+        font-size: 20px;
+    }
+
+    #share-options > div > div {
+        width: 30px;
+        height: 30px;
     }
 }
 
@@ -159,6 +226,21 @@
         right: 1rem;
         width: 20px;
         height: 20px;
+    }
+
+    #share-options {
+        width: 270px;
+        height: 200px;
+        right: 3rem;
+    }
+
+    #share-options > div > h4 {
+        font-size: 20px;
+    }
+
+    #share-options > div > div {
+        width: 30px;
+        height: 30px;
     }
 }
 
@@ -185,6 +267,21 @@
         right: 1rem;
         width: 15px;
         height: 15px;
+    }
+
+    #share-options {
+        width: 210px;
+        height: 150px;
+        right: 1rem;
+    }
+
+    #share-options > div > h4 {
+        font-size: 16px;
+    }
+
+    #share-options > div > div {
+        width: 20px;
+        height: 20px;
     }
 }
 
