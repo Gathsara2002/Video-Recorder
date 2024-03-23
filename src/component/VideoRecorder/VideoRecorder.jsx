@@ -15,8 +15,7 @@ const VideoRecorder = () => {
         try {
             const audioStream = await navigator.mediaDevices.getUserMedia({
                 audio: {
-                    echoCancellation: true,
-                    noiseSuppression: true
+                    echoCancellation: true, noiseSuppression: true
                 }
             });
             const videoTrack = webcamRef.current.video.srcObject.getVideoTracks()[0];
@@ -79,17 +78,12 @@ const VideoRecorder = () => {
         setShare(prevShare => !prevShare);
     }
 
-    return (
-        <div className="video-recorder container-fluid position-relative" id='screen'>
-            {videoUrl ? (
-                <video controls src={videoUrl} id="playback" className=""/>
-            ) : (
-                <Webcam id='webcam'
-                        audio={false}
-                        ref={webcamRef}
-                        screenshotFormat="image/jpeg"
-                />
-            )}
+    return (<div className="video-recorder container-fluid position-relative" id='screen'>
+            {videoUrl ? (<video controls src={videoUrl} id="playback" className=""/>) : (<Webcam id='webcam'
+                                                                                                 audio={false}
+                                                                                                 ref={webcamRef}
+                                                                                                 screenshotFormat="image/jpeg"
+                />)}
 
             <div id="button-bar" className="w-100 d-flex align-items-center justify-content-center">
                 <div className={"w-75 h-auto d-flex align-items-center justify-content-evenly"}>
@@ -103,28 +97,24 @@ const VideoRecorder = () => {
             </div>
 
             <button onClick={retakeRecording} id='retake-btn' className={"position-fixed"}></button>
-            {recording && (
-                <div id='indicator' className={paused ? "paused-dot" : "recording-dot"}/>
-            )}
+            {recording && (<div id='indicator' className={paused ? "paused-dot" : "recording-dot"}/>)}
 
-            {share && (
-                <div className={"position-fixed"} id='share-options'>
-                    <div className={"d-flex align-items-center gap-3 border-bottom me-3 ms-3"}>
-                        <div></div>
-                        <h4>WhatsApp</h4>
-                    </div>
-                    <div className={"d-flex align-items-center gap-3 border-bottom me-3 ms-3"}>
-                        <div></div>
-                        <h4>Email</h4>
-                    </div>
-                    <div className={"d-flex align-items-center gap-3 me-3 ms-3"}>
-                        <div></div>
-                        <h4>Add to my profile</h4>
-                    </div>
-                </div>)}
+            {share && (<div className={"position-fixed"} id='share-options'>
+                <div className={"d-flex align-items-center gap-3 border-bottom me-3 ms-3"}>
+                    <div></div>
+                    <h4>WhatsApp</h4>
+                </div>
+                <div className={"d-flex align-items-center gap-3 border-bottom me-3 ms-3"}>
+                    <div></div>
+                    <h4>Email</h4>
+                </div>
+                <div className={"d-flex align-items-center gap-3 me-3 ms-3"}>
+                    <div></div>
+                    <h4>Add to my profile</h4>
+                </div>
+            </div>)}
 
-        </div>
-    );
+        </div>);
 };
 
 export default VideoRecorder;
